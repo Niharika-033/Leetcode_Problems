@@ -11,10 +11,13 @@ class Solution {
                 i++;
                 j++;
             }
-            // if(i==s.length()){
-            //     return true;
-            // }
+           
         }
-        return i==s.length();//false;
+        if(i==s.length()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
