@@ -18,7 +18,8 @@
 class Solution {
     HashMap<Integer, Integer> map = new HashMap<>();
     int level = 1;
-    int maxLevel = 0;
+    int maxValue = Integer.MIN_VALUE;
+    int ans = -1;
 
     public int findBottomLeftValue(TreeNode root) {
         if (root == null) {
@@ -27,14 +28,15 @@ class Solution {
 
         if (level == 1) {
             map.clear();
-            maxLevel = 0;
+            maxValue = Integer.MIN_VALUE;
+            ans = -1;
         }
 
-        if (!map.containsKey(level)) {
-            map.put(level, root.val);
+        if (root.left == null && root.right == null) {
+            if (!map.containsKey(level)) {
+                map.put(level, root.val);
+            }
         }
-
-        maxLevel = Math.max(maxLevel, level);
 
         level++;
         findBottomLeftValue(root.left);
@@ -42,10 +44,14 @@ class Solution {
         level--;
 
         if (level == 1) {
-            return map.get(maxLevel);
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                if (entry.getKey() > maxValue) {
+                    maxValue = entry.getKey();
+                    ans = entry.getValue();
+                }
+            }
         }
 
-        return map.get(maxLevel);
+        return ans;
     }
-}  
-
+}
