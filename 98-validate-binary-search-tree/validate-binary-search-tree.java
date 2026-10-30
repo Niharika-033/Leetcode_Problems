@@ -13,8 +13,12 @@
  *     }
  * }
  */
+
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
         return check(root,Long.MIN_VALUE,Long.MAX_VALUE);
     }
     public boolean check(TreeNode root,long min,long max){
